@@ -1,0 +1,40 @@
+@import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'theme.scss';
+
+img {
+    border-radius: 50%;
+    height: 30px;
+}
+
+.mat-row.highlighted {
+    background: lightgrey;
+  }
+
+.status {
+    background: #C1E5DC;
+    color: #0B8357;
+    width: 72px !important;
+    min-width: unset!important
+}
+
+.lbl {
+    background: #C1D5F0;
+    color: #004495;
+    width: 72px !important;
+    min-width: unset!important
+}
+
+html {
+    background-color: #F1F2F7;
+}
+.totalsRow {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.mat-raised-button.mat-warn {
+    background-color: #C72929;
+}
+
+   

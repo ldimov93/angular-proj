@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>
+        {{title}}
+</h1>
+     
+<form (ngSubmit)="submit(form)">
+    <mat-dialog-content>
+        <mat-form-field>
+                <input matInput placeholder="Full name..." [formControl]="fullName" required>
+        </mat-form-field>
+        <mat-form-field>
+                <mat-select #select placeholder="location">
+                        <mat-option *ngFor="let location of locations" [value]="location._id">
+                        {{location.name}}
+                        </mat-option>
+                </mat-select>
+        </mat-form-field>    
+            <!--<mat-form-field>
+                <mat-select #select placeholder="Company" (selectionChange)="applyFilter($event.value)">
+                        <mat-option *ngFor="let location of locations" [value]="location._id">
+                        {{location.name}}
+                        </mat-option>
+                </mat-select>
+            </mat-form-field>-->
+    </mat-dialog-content>
+</form>
+
+       
+<div mat-dialog-actions>
+    <button mat-button (click)="onDismiss()">Close</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()">Save</button>
+</div>
