@@ -1,5 +1,5 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Component, OnInit, Inject, Input, AfterViewInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { Office } from '../office';
 
@@ -10,9 +10,8 @@ import { Office } from '../office';
 })
 export class AddMemberDialogComponent implements OnInit {
   
-  @Input() locations: Office[];
   title: string;
-  message: string;
+  locations: Office[];
   fullName = new FormControl('', [Validators.required, Validators.email]);
 
   getErrorMessage() {
@@ -23,14 +22,15 @@ export class AddMemberDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: AddMemberDialogModel) {
     // Update view with given values
     this.title = data.title;
-    this.message = data.message;
+    this.locations = data.locations;
   }
 
   ngOnInit() {
+    console.log(this.locations);
   }
 
   ngAfterInit() {
-    //console.log(this.locations);
+    
   }
 
   onConfirm(): void {
@@ -47,6 +47,6 @@ export class AddMemberDialogComponent implements OnInit {
 
 export class AddMemberDialogModel {
 
-  constructor(public title: string, public message: string) {
+  constructor(public title: string, public locations: Office[]) {
   }
 }

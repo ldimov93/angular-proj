@@ -19,6 +19,7 @@
 </style>
 
 <div class="content" role="main">
+    <!---->
   <!--<table class="table">  
     <tr ngclass="btn-primary">  
       <th class="tbl2">Member</th>  
@@ -36,23 +37,31 @@
     </tr>  
 
   </table>  -->
-  <mat-tab-group (selectedTabChange)="tabClick($event)">
-    <mat-tab *ngFor="let status of statuses" [label]="getStatusesById(status.key)">
+  <mat-tab-group (selectedTabChange)="applyFilter($event)">
+    <mat-tab *ngFor="let status of statuses" [label]="getStatusById(status.key)">
         <ng-template mat-tab-label>
-            {{getStatusesById(status.key) + ' ' + getDataLength(status.key)}}
+            {{getStatusById(status.key) + ' ' + getDataLength(status.key)}}
          </ng-template>      
     </mat-tab>
   </mat-tab-group> 
   <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+      <input matInput [ngModel]="globalFilter" (ngModelChange)="applyFilter($event)" name="searchFilt" ngDefaultControl placeholder="Search">
+      <!--<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">-->
   </mat-form-field>
   <mat-form-field>
-    <mat-select #select placeholder="location" (selectionChange)="applyFilter($event.value)">
+    <mat-select #select placeholder="Location" [formControl]="locationFilter" name="locationFilter">
       <mat-option *ngFor="let location of locations" [value]="location._id">
         {{location.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-form-field>
+      <mat-select #select placeholder="Team" [formControl]="teamFilter" name="teamFilter">
+        <mat-option *ngFor="let team of teams" [value]="team._id">
+          {{team.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   <button mat-raised-button color="warn" *ngIf="selection.hasValue()" (click)="confirmDialog()">Delete</button>
   <button mat-raised-button color="primary" (click)="addMemberDialog()">Add Member</button>
   <div class="totalsRow"><strong>{{getFilteredDataLength()}}</strong> results (of total <strong>{{dataSource.data.length}}</strong>)</div>
@@ -87,14 +96,14 @@
           <!-- Team Column -->
           <ng-container matColumnDef="team">
             <th mat-header-cell *matHeaderCellDef> Team </th>
-            <td mat-cell *matCellDef="let element"> {{element.team}} </td>
+            <td mat-cell *matCellDef="let element"> {{getTeamById(element.team)}} </td>
           </ng-container>
       
           <!-- Status/Label Column -->
           <ng-container matColumnDef="calculatedStatus">
             <th mat-header-cell *matHeaderCellDef> Status / Label </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-raised-button class="status"> {{getStatusesById(element.calculatedStatus)}} </button>&nbsp;
+              <button mat-raised-button class="status"> {{getStatusById(element.calculatedStatus)}} </button>&nbsp;
               <span *ngIf="createdAtCompareDate(element.createdAt)"><button mat-raised-button class="lbl"> New </button></span>
             </td>
           </ng-container>    
@@ -112,11 +121,11 @@
               <span class="tstSpan">{{getMemberLocationById(element.office)}}</span></td>
           </ng-container>    
       
-          <!-- Status Column - DELETE !!! -->
-          <ng-container matColumnDef="status">
+          <!-- Status Column -->
+          <!--<ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef> Status </th>
             <td mat-cell *matCellDef="let element">{{element.calculatedStatus}} </td>
-          </ng-container>        
+          </ng-container>  -->      
         
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"

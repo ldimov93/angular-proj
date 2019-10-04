@@ -24,7 +24,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
 import { AuthService } from './auth.service';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { MatDialogModule } from "@angular/material";
+import { MatDialogModule } from "@angular/material/dialog";
 import { AddMemberDialogComponent } from './add-member-dialog/add-member-dialog.component';
 
 @NgModule({

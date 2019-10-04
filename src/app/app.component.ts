@@ -18,26 +18,32 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from './confirm-dialog/con
 import { AddMemberDialogModel, AddMemberDialogComponent } from './add-member-dialog/add-member-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, FormControl} from '@angular/forms';
+import { Team } from './team';
 
 const ELEMENT_DATA: Member[] = [
-  {name: "TestName1", email: 'test1@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-9-23"), team: "Hoonigan Racing", startDate: new Date("23-9-2019"), office: "1e", calculatedStatus: "active"},
-  {name: "TestName2", email: 'test2@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-9-23"), team: "NewTeam2", startDate: new Date("23-9-2019"), office: "2d", calculatedStatus: "active"},
-  {name: "TestName3", email: 'test3@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-8-23"), team: "NewTeam3", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "drop_in"},
-  {name: "TestName4", email: 'test4@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-8-23"), team: "NewTeam", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "former"},
-  {name: "TestName5", email: 'test5@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-7-23"), team: "NewTeam", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "contact"},
-  {name: "TestName6", email: 'test6@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-7-23"), team: "NewTeam", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "lead"},
-  {name: "TestName7", email: 'test7@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-7-23"), team: "NewTeam", startDate: new Date("23-9-2019"), office: "2d", calculatedStatus: "lead"},
-  {name: "TestName8", email: 'test8@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-6-23"), team: "NewTeam", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "lead"},
-  {name: "TestName9", email: 'test9@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-6-23"), team: "NewTeam", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "contact"},
-  {name: "TestName10", email: 'test10@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-5-23"), team: "NewTeam", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "contact"},
-  {name: "TestName11", email: 'test11@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-3-23"), team: "NewTeam", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "contact"},
+  {name: "TestName1", email: 'test1@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-10-1"), team: "1a", startDate: new Date("23-9-2019"), office: "1e", calculatedStatus: "active"},
+  {name: "TestName2", email: 'test2@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-10-1"), team: "1a", startDate: new Date("23-9-2019"), office: "2d", calculatedStatus: "active"},
+  {name: "TestName3", email: 'test3@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-10-1"), team: "1a", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "drop_in"},
+  {name: "TestName4", email: 'test4@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-8-23"), team: "2a", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "former"},
+  {name: "TestName5", email: 'test5@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-7-23"), team: "2a", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "contact"},
+  {name: "TestName6", email: 'test6@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-7-23"), team: "2a", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "lead"},
+  {name: "TestName7", email: 'test7@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-7-23"), team: "1a", startDate: new Date("23-9-2019"), office: "2d", calculatedStatus: "lead"},
+  {name: "TestName8", email: 'test8@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-6-23"), team: "1a", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "lead"},
+  {name: "TestName9", email: 'test9@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-6-23"), team: "2a", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "contact"},
+  {name: "TestName10", email: 'test10@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-5-23"), team: "1a", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "contact"},
+  {name: "TestName11", email: 'test11@gmail.com', image: "https://cdn2.iconfinder.com/data/icons/avatar-2/512/Fred_man-512.png", createdAt: new Date("2019-3-23"), team: "2a", startDate: new Date("23-9-2019"), office: "3c", calculatedStatus: "contact"},
 ];
 
 const OFFICE_DATA: Office[] = [
   {_id: "1e", name: "Seattle"},
   {_id: "2d", name: "London"},
   {_id: "3c", name: "Paris"}
+];
+
+const TEAMS: Team[] = [
+  {_id: "1a", name: "Hoonigan Racing"},
+  {_id: "2a", name: "Red Bull Racing"}
 ];
 
 let STATUSES = [
@@ -68,15 +74,27 @@ export class AppComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Member>(ELEMENT_DATA);
   selection = new SelectionModel<Member>(true, []);
 
-  //myJSON = JSON.stringify(ELEMENT_DATA);
-
   locations: Office[] = OFFICE_DATA;
+  teams: Team[] = TEAMS;
   statuses = STATUSES;
   
   sortedData: Member[];
 
   tabFilter = "";
   result: string = '';
+
+  nameFilter = new FormControl();
+  locationFilter = new FormControl();
+  teamFilter = new FormControl();
+  statusFilter: any;
+  
+  globalFilter: any;
+
+  filteredValues = {
+    name: '', team: '', 
+    office: '',
+    calculatedStatus: ''
+  };
  
   constructor(public dialog: MatDialog) {}
  
@@ -86,7 +104,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     const dialogData = new ConfirmDialogModel("Delete Member(s)", message);
  
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: "60px",
+      maxWidth: "600px",
       data: dialogData
     });
  
@@ -101,7 +119,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   addMemberDialog() {
     const message = `Are you sure you want to add the selected member(s)?`;
  
-    const dialogData = new AddMemberDialogModel("Add Member", message);
+    const dialogData = new AddMemberDialogModel("Add Member", this.locations);
  
     const dialogRef = this.dialog.open(AddMemberDialogComponent, {
       maxWidth: "600px",
@@ -111,7 +129,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
       if (dialogResult) {
-        //this.deleteMembers();
+        // TO BE IMPLEMENTED
       }
     });  
   }
@@ -122,25 +140,88 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.statuses.unshift({key: "all", value: "All"});
     this.dataSource.sort = this.sort;
 
-    //this.dataSource.filterPredicate = function(data, filter: string): boolean {
-    //  return data.name.toLowerCase().includes(filter) || data.office.toLowerCase().includes(filter) || data.team.toString().includes(filter);
-    //};        
+    this.teams.unshift({_id: "0", name: "All"});
+    this.locations.unshift({_id: "0", name: "All"});
+
+    this.initiateFilters();
+    
+    this.dataSource.filterPredicate = this.customFilterPredicate();      
+  }
+
+  initiateFilters() {
+    // Filters section
+    this.nameFilter.valueChanges.subscribe((nameFilterValue) => {
+      this.filteredValues['name'] = nameFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });    
+
+    this.locationFilter.valueChanges.subscribe((locationFilterValue) => {
+      if (locationFilterValue == 0) { // Location/Office = All
+        this.filteredValues['office'] = '';
+      } else {
+        this.filteredValues['office'] = locationFilterValue;
+      }
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });    
+
+    this.teamFilter.valueChanges.subscribe((teamFilterValue) => {
+      if (teamFilterValue == 0) { // Team = All
+        this.filteredValues['team'] = '';
+      } else {
+        this.filteredValues['team'] = teamFilterValue;
+      }
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    }); 
+    this.statusFilter = new FormControl(this.tabFilter);
+  }
+  
+  customFilterPredicate() {
+    const myFilterPredicate = (data: Member, filter: string): boolean => {
+      var globalMatch = !this.globalFilter;
+      if (this.globalFilter) {
+        switch(this.globalFilter.constructor.name) {
+          case 'MatSelectChange':
+            globalMatch = data.office.toString().trim().toLowerCase().indexOf(this.globalFilter.value.toLowerCase()) !== -1;
+            break;
+          default:
+            globalMatch = data.name.toString().trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
+        }       
+      }
+
+      if (!globalMatch) {
+        return;
+      }
+
+      let searchString = JSON.parse(filter);
+      return data.name.toString().trim().indexOf(searchString.name) !== -1 && 
+        data.office.toString().trim().indexOf(searchString.office) !== -1 &&
+        data.team.toString().trim().toLowerCase().indexOf(searchString.team.toLowerCase()) !== -1 &&
+        data.calculatedStatus.toString().trim().toLowerCase().indexOf(searchString.calculatedStatus.toLowerCase()) !== -1;
+    }
+    return myFilterPredicate;
   }
 
   ngOnAfterViewInit() {
     
   }
+
   getMemberLocationById(id: string) {
-    //console.log(id);
-    //debugger
     return this.locations.filter(x => x._id == id)[0].name;
   }
 
-  getStatusesById(id: string) {
+  getMemberLocationByVal(val: string) {
+    return this.locations.filter(x => x.name == val)[0]._id;
+  }
+
+  getStatusById(id: string) {
     return this.statuses.filter(x => x.key == id)[0].value;
   }
 
-  getStatusesByVal(val: string) {
+  getTeamById(id: string) {
+    return this.teams.filter(x => x._id == id)[0].name;
+  }
+
+  getStatusByVal(val: string) {
     return this.statuses.filter(x => x.value == val)[0].key;
   }
 
@@ -150,20 +231,12 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   tabClick(event) {
     // filter table data 
-    var textLabel = this.getStatusesByVal(event.tab.textLabel);
-    if (textLabel == 'all') {
-      this.applyFilter("");
-    } else { 
-      this.applyFilter(textLabel);
-    }
+    var textLabel = this.getStatusByVal(event.tab.textLabel);
     this.tabFilter = textLabel;
-    //console.log(this.tabFilter);
   }
 
   tblRow(row: Member, event) {
-    //console.log(row);
     event.stopPropagation();
-    //this.selection.toggle(row);
   }
 
   getFilteredDataLength() {
@@ -184,7 +257,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         countNum = this.dataSource.data.filter(x => x.calculatedStatus == calcStatus).length;
     }
     return countNum;
-    //console.log(this.dataSource.data.filter(x => x.calculatedStatus == calcStatus));
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -197,13 +269,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   deleteMembers() {
     this.selection.selected.forEach(item => {
       let index: number = this.data.findIndex(d => d === item);
-      //console.log(this.data.findIndex(d => d === item));
       this.data.splice(index, 1)
       this.dataSource = new MatTableDataSource<Member>(this.data);
     });
     this.selection = new SelectionModel<Member>(true, []);
-    // Refresh current tab filter
-    this.applyFilter(this.tabFilter);
+
+    // Refresh table
+    this.dataSource.filterPredicate = this.customFilterPredicate();
+    this.dataSource.filter = JSON.stringify(this.filteredValues);
   }
 
   // If created at is within current month, show "New" label
@@ -211,11 +284,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     var month = new Date().getMonth();
     return month == createdAt.getMonth();
   }
+
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
+    
   }
 
   /** The label for the checkbox on the passed row */
@@ -227,8 +302,34 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   /* Filtering */
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }  
-  
+  applyFilter(filter) {
+    switch(filter.constructor.name) {
+      case 'MatSelectChange':
+        if (filter.value == 0) { // Location = All || Team = All
+          if (typeof this.globalFilter !== 'undefined') {
+            this.filteredValues['name'] = this.globalFilter;
+            this.dataSource.filter = JSON.stringify(this.filteredValues);
+          }
+          this.dataSource.filter = '';
+        }
+        break;
+      case 'MatTabChangeEvent':
+        if (typeof filter.tab.textLabel !== 'undefined') {
+          let filterId = this.getStatusByVal(filter.tab.textLabel);
+          if (filterId == 'all') { // Status = All
+            this.filteredValues['calculatedStatus'] = '';
+          } else {
+            this.filteredValues['calculatedStatus'] = filterId;
+          }
+         
+          this.tabFilter = this.filteredValues['calculatedStatus'];
+          this.dataSource.filter = JSON.stringify(this.filteredValues);
+        }
+        break;
+      default:
+        this.globalFilter = filter;
+        this.dataSource.filter = JSON.stringify(this.filteredValues);
+        
+    }
+  }   
 }
