@@ -1,22 +1,40 @@
 <h1 mat-dialog-title>
         {{title}}
 </h1>
-     
-<form (ngSubmit)="submit(form)">
+     Feature under development
+<!--<form (ngSubmit)="submit(form)">
     <mat-dialog-content>
-        To be implemented...
-        <!--<mat-form-field>
-                <input matInput placeholder="Full name..." [formControl]="fullName" required>
+        <mat-form-field id="fullName">
+                <input matInput placeholder="Full name..." required>
         </mat-form-field>
         <mat-form-field>
-                <mat-select #select placeholder="location">
-                        <mat-option *ngFor="let location of locationsA" [value]="location._id">
+                <mat-select #select placeholder="Team" required>
+                        <mat-option *ngFor="let team of teams" [value]="team._id">
+                        {{team.name}}
+                        </mat-option>
+                </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+                <mat-select #select placeholder="Location" required>
+                        <mat-option *ngFor="let location of locations" [value]="location._id">
                         {{location.name}}
                         </mat-option>
                 </mat-select>
-        </mat-form-field>--> 
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+                <input matInput placeholder="Contact Email..." required>
+        </mat-form-field>
+        <mat-form-field>
+                <input matInput placeholder="Phone Number..." required>
+        </mat-form-field>
+        <mat-form-field id="datePick">
+                <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="picker" placeholder="Start Date...">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
     </mat-dialog-content>
-</form>
+</form>-->
 
        
 <div mat-dialog-actions>

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "assignment-officernd-ld": {
+    "angular-proj": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/assignment-officernd-ld",
+            "outputPath": "dist/angular-proj",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "assignment-officernd-ld:build"
+            "browserTarget": "angular-proj:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "assignment-officernd-ld:build:production"
+              "browserTarget": "angular-proj:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "assignment-officernd-ld:build"
+            "browserTarget": "angular-proj:build"
           }
         },
         "test": {
@@ -115,15 +115,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "assignment-officernd-ld:serve"
+            "devServerTarget": "angular-proj:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "assignment-officernd-ld:serve:production"
+              "devServerTarget": "angular-proj:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "assignment-officernd-ld"
+  "defaultProject": "angular-proj"
 }

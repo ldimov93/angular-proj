@@ -119,7 +119,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   addMemberDialog() {
     const message = `Are you sure you want to add the selected member(s)?`;
  
-    const dialogData = new AddMemberDialogModel("Add Member", this.locations);
+    const dialogData = new AddMemberDialogModel("Add Member", [this.locations, this.teams]);
  
     const dialogRef = this.dialog.open(AddMemberDialogComponent, {
       maxWidth: "600px",

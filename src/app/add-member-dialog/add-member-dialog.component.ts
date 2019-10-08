@@ -2,6 +2,9 @@ import { Component, OnInit, Inject, Input, AfterViewInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { Office } from '../office';
+import { Team } from '../team';
+import { Member } from '../member';
+import { digest } from '@angular/compiler/src/i18n/serializers/xmb';
 
 @Component({
   selector: 'app-add-member-dialog',
@@ -12,25 +15,31 @@ export class AddMemberDialogComponent implements OnInit {
   
   title: string;
   locations: Office[];
-  fullName = new FormControl('', [Validators.required, Validators.email]);
+  teams: Team[];
+  //fullName = new FormControl('', [Validators.required, Validators.email]);
 
-  getErrorMessage() {
+  /*getErrorMessage() {
     return this.fullName.hasError('required') ? 'You must enter a full name': '';
-  }
+  }*/
 
   constructor(public dialogRef: MatDialogRef<AddMemberDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddMemberDialogModel) {
     // Update view with given values
-    this.title = data.title;
-    this.locations = data.locations;
+    this.locations = data.passedData[0];
+    this.teams = data.passedData[1];
   }
 
   ngOnInit() {
-    console.log(this.locations);
+
   }
 
   ngAfterInit() {
     
+  }
+
+  dateFilter = (d: Date): boolean => {
+    // Prevent date < 1/1/2019 from being selected.
+    return d.getFullYear() >= 2019;
   }
 
   onConfirm(): void {
@@ -47,6 +56,6 @@ export class AddMemberDialogComponent implements OnInit {
 
 export class AddMemberDialogModel {
 
-  constructor(public title: string, public locations: Office[]) {
+  constructor(public title: string, public passedData: [Office[], Team[]]) {
   }
 }
